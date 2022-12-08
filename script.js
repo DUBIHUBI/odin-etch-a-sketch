@@ -2,12 +2,15 @@ const container = document.querySelector('.grid-container');
 const rainbowButton = document.querySelector('.rainbow-btn');
 const gridButton = document.querySelector('.grid-btn');
 const eraserButton = document.querySelector('.eraser-btn');
+const slider = document.querySelector('.slider');
+const sliderText = document.querySelector('.slider-text');
 let brushColour = 'black';
 
+function clearGrid() {
+  container.innerHTML = '';
+}
+
 function createGrid(size) {
-  container.style.display = 'grid';
-  container.style.height = '600px';
-  container.style.width = '600px';
   container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
   container.style.gridTemplateRows = `repeat(${size}, 1fr)`;
 
@@ -19,7 +22,8 @@ function createGrid(size) {
   }
 }
 
-createGrid(24);
+createGrid(slider.value);
+sliderText.textContent = `Grid Size: ${slider.value} x ${slider.value}`;
 
 function setColour(e) {
   switch (brushColour) {
@@ -56,3 +60,12 @@ function random256() {
 function randomRGB() {
   return `rgb(${random256()}, ${random256()}, ${random256()})`;
 }
+
+slider.addEventListener('input', () => {
+  sliderText.textContent = `Grid Size: ${slider.value} x ${slider.value}`;
+});
+
+slider.addEventListener('mouseup', () => {
+  clearGrid();
+  createGrid(slider.value);
+});
