@@ -2,9 +2,11 @@ const container = document.querySelector('.grid-container');
 const rainbowButton = document.querySelector('.rainbow-btn');
 const gridButton = document.querySelector('.grid-btn');
 const eraserButton = document.querySelector('.eraser-btn');
+const clearButton = document.querySelector('.clear-btn');
 const slider = document.querySelector('.slider');
 const sliderText = document.querySelector('.slider-text');
-let brushColour = 'black';
+const colourPicker = document.querySelector('.colour-picker');
+let brushColour = 'colour';
 
 function clearGrid() {
   container.innerHTML = '';
@@ -27,8 +29,8 @@ sliderText.textContent = `Grid Size: ${slider.value} x ${slider.value}`;
 
 function setColour(e) {
   switch (brushColour) {
-    case 'black':
-      e.target.style.backgroundColor = 'black';
+    case 'colour':
+      e.target.style.backgroundColor = colourPicker.value;
       break;
     case 'rainbow':
       e.target.style.backgroundColor = randomRGB();
@@ -43,6 +45,15 @@ function setColour(e) {
 
 gridButton.addEventListener('click', () => {
   container.classList.toggle('grid-gap');
+});
+
+colourPicker.addEventListener('click', () => {
+  brushColour = 'colour';
+});
+
+clearButton.addEventListener('click', () => {
+  clearGrid();
+  createGrid(slider.value);
 });
 
 eraserButton.addEventListener('click', () => {
@@ -65,7 +76,7 @@ slider.addEventListener('input', () => {
   sliderText.textContent = `Grid Size: ${slider.value} x ${slider.value}`;
 });
 
-slider.addEventListener('mouseup', () => {
+slider.addEventListener('change', () => {
   clearGrid();
   createGrid(slider.value);
 });
