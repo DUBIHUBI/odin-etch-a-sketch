@@ -1,0 +1,14 @@
+.grid-container {
+  background-color: #1e1e1e;
+  margin: auto;
+  border: 1px solid #1e1e1e;
+}
+
+.grid-gap {
+  gap: 1px;
+}
+
+.grid-item {
+  background-color: rgb(255, 250, 240);
+  /* border: 1px solid #1e1e1e; */
+}
